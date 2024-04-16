@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="true"/>
+		<item key="wholeword" value="true"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<item key="selection" value=""/>
+		<list key="findhistory">
+			<item value="onkey"/>
+			<item value="25"/>
+			<item value="0"/>
+			<item value="worldEnds()"/>
+			<item value="worldEnds();"/>
+			<item value="WorldEnd"/>
+			<item value="worldend"/>
+			<item value="exception"/>
+			<item value="runtime"/>
+			<item value="encode"/>
+			<item value="sen3"/>
+			<item value="deque3"/>
+			<item value="throw"/>
+			<item value="remove"/>
+			<item value="lengthIsThree"/>
+		</list>
+		<list key="replacehistory">
+			<item value="sen4"/>
+			<item value=""/>
+			<item value="deque4"/>
+			<item value="LengthIsThree"/>
+			<item value="IsBob"/>
+			<item value="getLeftmost"/>
+			<item value="Minus"/>
+			<item value="minus"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="314"/>
+		<item key="DIALOG_Y_ORIGIN" value="313"/>
+		<item key="DIALOG_WIDTH" value="336"/>
+		<item key="DIALOG_HEIGHT" value="400"/>
+		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
+	</section>
+</section>

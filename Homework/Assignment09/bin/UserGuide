@@ -1,0 +1,15 @@
+How to Play:
+1) Every time you click on the board, a cell will be revealed.
+   If it is not a bomb, then numbers will appear on them indicating how many bombs are next to it.
+2) Using this information, try to reveal all non-bomb cells
+3) If you do click a bomb, it will trigger an explosion and you will end the game
+
+Added For Extra Credit:
+Bomb-tracking-
+The bombs will be kept track of utilizing the number of flags the user has placed down
+** Be careful, though, the number of bombs will decrease even if you place a flag in the wrong place!
+
+Color-Changing-
+The color of the number on the revealed cell will be different based on the number of bombs next to it
+
+--> Based off the original minesweeper game

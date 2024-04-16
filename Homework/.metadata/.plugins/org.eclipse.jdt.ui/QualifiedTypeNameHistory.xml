@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="javalib.funworld.WorldScene"/>
+    <fullyQualifiedTypeName name="javalib.worldcanvas.WorldCanvas"/>
+    <fullyQualifiedTypeName name="javalib.funworld.World"/>
+    <fullyQualifiedTypeName name="Leaf"/>
+    <fullyQualifiedTypeName name="java.util.function.Predicate"/>
+    <fullyQualifiedTypeName name="lengthIsThree"/>
+    <fullyQualifiedTypeName name="java.util.Comparator"/>
+    <fullyQualifiedTypeName name="ANode"/>
+    <fullyQualifiedTypeName name="java.util.Iterator"/>
+    <fullyQualifiedTypeName name="java.util.NoSuchElementException"/>
+    <fullyQualifiedTypeName name="java.util.function.Function"/>
+    <fullyQualifiedTypeName name="javalib.worldimages.EquilateralTriangleImage"/>
+    <fullyQualifiedTypeName name="javalib.worldimages.WorldImage"/>
+    <fullyQualifiedTypeName name="javalib.worldimages.RectangleImage"/>
+    <fullyQualifiedTypeName name="javalib.worldimages.OverlayImage"/>
+    <fullyQualifiedTypeName name="javalib.impworld.WorldScene"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="java.util.Deque"/>
+    <fullyQualifiedTypeName name="java.util.Queue"/>
+    <fullyQualifiedTypeName name="java.util.ArrayDeque"/>
+    <fullyQualifiedTypeName name="java.util.Collections"/>
+    <fullyQualifiedTypeName name="java.util.LinkedList"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.awt.Color"/>
+    <fullyQualifiedTypeName name="javalib.worldimages.Posn"/>
+</qualifiedTypeNameHistroy>

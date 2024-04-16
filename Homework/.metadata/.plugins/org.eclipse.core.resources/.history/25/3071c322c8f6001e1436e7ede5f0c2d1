@@ -1,0 +1,89 @@
+// abstract class that represents a nods
+
+import java.util.function.Predicate;
+
+abstract class ANode<T> {
+  ANode<T> next; // the next node
+  ANode<T> prev; // the previous node
+  
+  // adds a node
+  public void addValue(T value) {
+    new Node<T>(value, this.next, this);
+  }
+  
+  // removes a node
+  public abstract T removeValue();
+  
+}
+
+// represents a sentinel of type T
+class Sentinel<T> extends ANode<T> {
+  Sentinel() {
+    this.next = this;
+    this.prev = this;
+  }
+  
+  // removes a node
+  public T removeValue() {
+    throw new RuntimeException("Cannot remove from empty deque");
+  }
+  
+  // finds the first node that satisfies the predicate
+  public ANode<T> findHelp(Predicate<T> pred) {
+    return this;
+  }
+}
+
+// represents a node of type T
+class Node<T> extends ANode<T> {
+  T data; // represents the value in the node
+  
+  Node(T data) {
+    this.next = null;
+    this.prev = null;
+    this.data = data;
+  }
+  
+  Node(T data, ANode<T> next, ANode<T> prev) {
+    if (prev == null || next == null) {
+      throw new IllegalArgumentException("The previous or next node is null");
+    }
+    else {    
+      this.data = data;
+      this.next = next;
+      this.prev = prev;
+      prev.next = this;
+      next.prev = this;
+    }
+  }
+  
+  // removes this node
+  public T removeValue() {
+    next.prev = this.prev;
+    prev.next = this.next;
+    return this.data;
+  }
+}
+
+// represents a deque of type T
+class Deque<T> {
+  Sentinel<T> header; // the header of the deque
+  
+  Deque() {
+    this.header = new Sentinel<T>();
+  }
+  
+  Deque(Sentinel<T> header) {
+    this.header = header;
+  }
+  
+  // adds a node to the tail of this deque
+  public void addAtTail(T value) {
+    this.header.prev.addValue(value);
+  }
+  
+  // removes the first node from this deque and returns what was removed
+  public T removeFromHead() {
+    return this.header.next.removeValue();
+  }
+}

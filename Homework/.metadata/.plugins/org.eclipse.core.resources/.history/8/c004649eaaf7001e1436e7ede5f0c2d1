@@ -1,0 +1,190 @@
+import java.awt.Color;
+import java.util.ArrayList;
+
+import javalib.impworld.WorldScene;
+import javalib.worldimages.*;
+
+// represents a single game piece
+class GamePiece implements ILightEmAll {
+  // in logical coordinates, with the origin
+  // at the top-left corner of the screen
+  int row;
+  int col;
+  
+  // whether this GamePiece is connected to the
+  // adjacent left, right, top, or bottom pieces
+  boolean left;
+  boolean right;
+  boolean top;
+  boolean bottom;
+  
+  boolean powerStation; // whether the power station is on this piece
+  boolean powered; // whether or not this GamePiece is connected with the PowerStation
+  
+  // everything constructor (make my life easier for testing)
+  GamePiece(int row, int col, boolean left, boolean right, boolean top, boolean bottom, boolean powerStation, boolean powered) {
+    this.row = row;
+    this.col = col;
+    this.left = left;
+    this.right = right;
+    this.top = top;
+    this.bottom = bottom;
+    this.powerStation = powerStation;
+    this.powered = powered;
+  }
+  
+  // 'rotates' the GamePiece
+  void rotate() {
+    boolean tpleft = this.left;
+    boolean tpright = this.right;
+    boolean tptop = this.top;
+    boolean tpbottom = this.bottom;
+    this.left = tpbottom;
+    this.right = tptop;
+    this.top = tpleft;
+    this.bottom = tpright;
+    
+  }
+  
+  // lights up all neighbors that are connected
+  public void lightAllNeighbors(ArrayList<ArrayList<GamePiece>> board) {
+    // when there is a left wire
+    if (this.left && (this.col - 1) >= 0) {
+      GamePiece left = board.get(this.row).get(this.col - 1);
+      left.powered = true;
+      
+      if (!left.powered && left.right && this.powered) {
+        left.powered = true;
+        left.lightAllNeighbors(board);
+      }
+      
+      left.lightAllNeighbors(board);
+    }
+    
+    // when there is a right wire
+    if (this.right && (this.col + 1) < board.get(0).size()) {
+      GamePiece right = board.get(this.row).get(this.col + 1);
+      right.powered = true;
+      
+      if (!right.powered && right.left && this.powered) {
+        right.powered = true;
+        right.lightAllNeighbors(board);
+      }
+    }
+    
+    // when there is a top wire
+    if (this.top && (this.row - 1) >= 0) {
+      GamePiece top = board.get(this.row - 1).get(this.col);
+      top.powered = true;
+      
+      if (!top.powered && top.bottom && this.powered) {
+        top.powered = true;
+        top.lightAllNeighbors(board);
+      }
+    }
+    
+    // when there is a bottom wire
+    if (this.bottom && (this.row + 1) < board.size()) {
+      GamePiece bottom = board.get(this.row + 1).get(this.col);
+      bottom.powered = true;
+      
+      if (!bottom.powered && bottom.top && this.powered) {
+        bottom.powered = true;
+        bottom.lightAllNeighbors(board);
+      }
+    }
+  }
+  
+  // determines if two gamePieces are connected & this gamePiece is lit
+  public boolean connectedLit(GamePiece g) {
+    // left wire
+    if (this.powered && this.left && g.right && g.row == this.row && g.col + 1 == this.col) {
+      return true;
+    }
+    
+    // right wire
+    else if (this.powered && this.right && g.right && g.row == this.row && g.col - 1 == this.col) {
+      return true;
+    }
+    
+    // top wire
+    else if (this.powered && this.top && g.right && g.row + 1 == this.row && g.col == this.col) {
+      return true;
+    }
+    
+    // bottom wire
+    else if (this.powered && this.bottom && g.right && g.row - 1 == this.row && g.col == this.col) {
+      return true;
+    }
+    
+    // everything else returns false
+    return false;
+  }
+  
+  
+  // finds all the neighbors of a GamePiece given a board
+  public ArrayList<GamePiece> neighbor(ArrayList<ArrayList<GamePiece>> board) {
+    ArrayList<GamePiece> neighbor = new ArrayList<GamePiece>();
+    
+    if (this.col - 1 >= 0) {
+      neighbor.add(board.get(this.row).get(this.col - 1));
+    }
+    
+    if (this.col + 1 < board.get(0).size()) {
+      neighbor.add(board.get(this.row).get(this.col + 1));
+    }
+    
+    if (this.row - 1 >= 0) {
+      neighbor.add(board.get(this.row - 1).get(this.col));
+    }
+    
+    if (this.row + 1 < board.size()) {
+      neighbor.add(board.get(this.row + 1).get(this.col));
+    }
+    
+    return neighbor;
+  }
+  
+  // calls the tileImage method
+  WorldScene draw(WorldScene s) {
+    if (this.powered) {
+      s.placeImageXY(this.tileImage(SIZE, 5, POWERED, this.powerStation), 
+          this.col * SIZE + SIZE / 2, this.row * SIZE + SIZE / 2);
+      return s;
+    }
+    s.placeImageXY(this.tileImage(SIZE,  5, UNPOWERED, powerStation),
+        this.col * SIZE + SIZE / 2, this.row * SIZE + SIZE / 2);
+    return s;
+  }
+  
+  // Generate an image of this, the given GamePiece.
+  // - size: the size of the tile, in pixels
+  // - wireWidth: the width of wires, in pixels
+  // - wireColor: the Color to use for rendering wires on this
+  // - hasPowerStation: if true, draws a fancy star on this tile to represent the power station
+  WorldImage tileImage(int size, int wireWidth, Color wireColor, boolean hasPowerStation) {
+    // Start tile image off as a blue square with a wire-width square in the middle,
+    // to make image "cleaner" (will look strange if tile has no wire, but that can't be)
+    WorldImage image = new OverlayImage(
+        new RectangleImage(wireWidth, wireWidth, OutlineMode.SOLID, wireColor),
+        new RectangleImage(size, size, OutlineMode.SOLID, Color.DARK_GRAY));
+    WorldImage vWire = new RectangleImage(wireWidth, (size + 1) / 2, OutlineMode.SOLID, wireColor);
+    WorldImage hWire = new RectangleImage((size + 1) / 2, wireWidth, OutlineMode.SOLID, wireColor);
+ 
+    if (this.top) image = new OverlayOffsetAlign(AlignModeX.CENTER, AlignModeY.TOP, vWire, 0, 0, image);
+    if (this.right) image = new OverlayOffsetAlign(AlignModeX.RIGHT, AlignModeY.MIDDLE, hWire, 0, 0, image);
+    if (this.bottom) image = new OverlayOffsetAlign(AlignModeX.CENTER, AlignModeY.BOTTOM, vWire, 0, 0, image);
+    if (this.left) image = new OverlayOffsetAlign(AlignModeX.LEFT, AlignModeY.MIDDLE, hWire, 0, 0, image);
+    if (hasPowerStation) {
+      image = new OverlayImage(
+                  new OverlayImage(
+                      new StarImage(size / 3, 7, OutlineMode.OUTLINE, new Color(255, 128, 0)),
+                      new StarImage(size / 3, 7, OutlineMode.SOLID, new Color(0, 255, 255))),
+                  image);
+    }
+    return image;
+  }
+}
+
+
+

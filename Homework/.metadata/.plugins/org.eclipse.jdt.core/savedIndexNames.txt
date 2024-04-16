@@ -1,0 +1,20 @@
+INDEX VERSION 1.134+/Users/laurenli/Documents/cs2510/EclipseWorkspace/Homework/.metadata/.plugins/org.eclipse.jdt.core
+2972170152.index
+674162194.index
+3243066151.index
+3159912941.index
+563653177.index
+3058332593.index
+1596577412.index
+569339716.index
+1865797976.index
+1453300399.index
+4288689575.index
+2141411334.index
+1480856221.index
+3869903292.index
+1764461220.index
+3324020542.index
+911741770.index
+2919502905.index
+2831485123.index

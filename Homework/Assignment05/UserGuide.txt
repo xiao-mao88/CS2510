@@ -1,0 +1,10 @@
+
+To Play ZTypeWorld:
+
+On the game board you will see words starting from the top and slowly falling towards the bottom.
+
+The goal is to continuously type each word that you see, to prevent them from reaching the bottom.
+
+If it any word reaches the bottom, it is GAME OVER.
+
+Remember, you can only type ONE word at a time, the word that you are currently typing will change to a RED color, while all the other words will stay their original BLUE color.
